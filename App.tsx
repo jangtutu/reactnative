@@ -2,6 +2,10 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
 
+interface EvenNumberTitleProps {
+  isEven: boolean;
+}
+
 interface propType {
   clickCount : number;
   onClick: ()=> void;
@@ -56,8 +60,16 @@ export default function App() {
     );
   }
 
+  function EvenNumberTitle(props: EvenNumberTitleProps) {
+    if (props.isEven) {
+      return <Text>짝수입니다</Text>
+    }
+    return null;
+  }
+
   return (
     <View style={[styles.container, {backgroundColor: generateColor()}]}>
+      <EvenNumberTitle isEven={clickCount % 2 ===0} />
       <Text style={[{fontWeight: 'bold'}, {fontSize: 20}, {backgroundColor: generateColor()}]}>TEST</Text>
       <Text style={styles.blodText}>TEST</Text>
       <Text style={styles.blodText}>클릭수 {clickCount}</Text>
