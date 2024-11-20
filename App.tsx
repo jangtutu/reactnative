@@ -1,6 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { StyleSheet, Text, View, Button } from 'react-native';
+import Toast from 'react-native-toast-message';
 
 interface EvenNumberTitleProps {
   isEven: boolean;
@@ -67,6 +68,14 @@ export default function App() {
     return null;
   }
 
+  const showToast = (someValue : number) => {
+    Toast.show({
+      type: 'success',
+      text1: `someValue: ${someValue}`,
+      text2: 'This is some something 👋'
+    });
+  }
+
   return (
     <View style={[styles.container, {backgroundColor: generateColor()}]}>
       <EvenNumberTitle isEven={clickCount % 2 ===0} />
@@ -79,9 +88,14 @@ export default function App() {
         setClickCount(clickCount + 1);
       }}/>
 
+      <Button title="토스트 띄우기" onPress={() => {
+        showToast(clickCount);
+      }}/>
+
       <SomeComponent clickCount={clickCount} onClick={() => {
         setClickCount(clickCount +1);
       }}/>
+      <Toast />
     </View>
   );
 }
